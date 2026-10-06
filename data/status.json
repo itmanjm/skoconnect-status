@@ -1,0 +1,51 @@
+{
+  "overall": "operational",
+  "updated_at": "2026-10-06T18:25:43-05:00",
+  "timezone": "America/Jamaica",
+  "components": [
+    {
+      "id": "marketing",
+      "name": "Marketing site",
+      "description": "skoconnect.com public website",
+      "url": "https://skoconnect.com/",
+      "up": true,
+      "http_code": 200,
+      "detail": "HTTP 200",
+      "checked_at": "2026-10-06T18:25:42-05:00",
+      "down_since": null
+    },
+    {
+      "id": "admin",
+      "name": "Admin portal",
+      "description": "School administrator web app (admin.skoconnect.com)",
+      "url": "https://admin.skoconnect.com/",
+      "up": true,
+      "http_code": 200,
+      "detail": "HTTP 200",
+      "checked_at": "2026-10-06T18:25:42-05:00",
+      "down_since": null
+    },
+    {
+      "id": "api",
+      "name": "App & API",
+      "description": "Mobile app backend / Cloud Functions (health endpoint incl. Firestore round-trip)",
+      "url": "https://us-central1-school-connect-enterprise.cloudfunctions.net/health",
+      "up": true,
+      "http_code": 200,
+      "detail": "healthy",
+      "checked_at": "2026-10-06T18:25:42-05:00",
+      "down_since": null
+    },
+    {
+      "id": "ingestion",
+      "name": "Document ingestion pipeline",
+      "description": "Cloud Run ingestion service (responding = up; root returns 405 by design)",
+      "url": "https://document-ingestion-pltacimgka-uc.a.run.app/",
+      "up": true,
+      "http_code": 405,
+      "detail": "HTTP 405",
+      "checked_at": "2026-10-06T18:25:43-05:00",
+      "down_since": null
+    }
+  ]
+}

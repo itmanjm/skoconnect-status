@@ -1,0 +1,28 @@
+{
+  "days": [
+    {
+      "date": "2026-10-06",
+      "component": "admin",
+      "up": 1,
+      "total": 1
+    },
+    {
+      "date": "2026-10-06",
+      "component": "api",
+      "up": 1,
+      "total": 1
+    },
+    {
+      "date": "2026-10-06",
+      "component": "ingestion",
+      "up": 1,
+      "total": 1
+    },
+    {
+      "date": "2026-10-06",
+      "component": "marketing",
+      "up": 1,
+      "total": 1
+    }
+  ]
+}
