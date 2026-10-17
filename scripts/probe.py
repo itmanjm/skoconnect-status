@@ -10,6 +10,7 @@ reachable (up); network-level failure (DNS, timeout, refused, TLS) = down.
 For the API we additionally require HTTP 200 and status:"ok" in the body.
 """
 import json
+import os
 import urllib.request
 import urllib.error
 from datetime import datetime, timezone, timedelta
@@ -48,31 +49,39 @@ COMPONENTS = [
     },
 ]
 
-TIMEOUT_SEC = 10
+TIMEOUT_SEC = 30
 DATA_DIR = Path(__file__).resolve().parent.parent / "data"
 HISTORY_DAYS = 90
 
 
 def probe(comp: dict) -> dict:
-    """Return {up: bool, http_code: int|0, detail: str}."""
+    """Return {up: bool, http_code: int|0, detail: str}.
+
+    Two attempts: Cloud Run scale-to-zero services can cold-start past the
+    timeout on the first hit; the immediate retry hits a warm instance and
+    measures real availability rather than startup latency.
+    """
     req = urllib.request.Request(comp["url"], method="GET",
                                   headers={"User-Agent": "skoconnect-status-probe/1.0"})
-    try:
-        with urllib.request.urlopen(req, timeout=TIMEOUT_SEC) as resp:
-            code = resp.status
-            body = resp.read(4096).decode("utf-8", "replace")
-    except urllib.error.HTTPError as e:
-        # Got an HTTP response -> surface reachable (e.g. ingestion 405)
-        code = e.code
-        body = ""
-    except Exception as e:  # noqa: BLE001 - network-level failure of any kind
-        return {"up": False, "http_code": 0, "detail": f"{type(e).__name__}: {e}"}
-
-    if comp["kind"] == "health":
-        ok = code == 200 and '"status":"ok"' in body.replace(" ", "")
-        return {"up": ok, "http_code": code,
-                "detail": "healthy" if ok else f"unexpected response (HTTP {code})"}
-    return {"up": True, "http_code": code, "detail": f"HTTP {code}"}
+    last = None
+    for attempt in (1, 2):
+        try:
+            with urllib.request.urlopen(req, timeout=TIMEOUT_SEC) as resp:
+                code = resp.status
+                body = resp.read(4096).decode("utf-8", "replace")
+        except urllib.error.HTTPError as e:
+            # Got an HTTP response -> surface reachable (e.g. ingestion 405)
+            code = e.code
+            body = ""
+        except Exception as e:  # noqa: BLE001 - network-level failure of any kind
+            last = f"{type(e).__name__}: {e}"
+            continue
+        if comp["kind"] == "health":
+            ok = code == 200 and '"status":"ok"' in body.replace(" ", "")
+            return {"up": ok, "http_code": code,
+                    "detail": "healthy" if ok else f"unexpected response (HTTP {code})"}
+        return {"up": True, "http_code": code, "detail": f"HTTP {code}"}
+    return {"up": False, "http_code": 0, "detail": f"unreachable after 2 attempts ({last})"}
 
 
 def now_jamaica_iso() -> str:
@@ -146,8 +155,15 @@ def main() -> None:
     print(json.dumps({"overall": status_out["overall"],
                       "components": {c["id"]: f"{'UP' if c['up'] else 'DOWN'} ({c['detail']})"
                                      for c in components_out}}, indent=2))
-    if not all_up:
-        raise SystemExit(2)  # nonzero but commit still happens; workflow reports outcome
+    summary = os.environ.get("GITHUB_STEP_SUMMARY")
+    if summary:
+        with open(summary, "a") as f:
+            f.write(f"## Probe result: {status_out['overall']}\n\n")
+            for c in components_out:
+                f.write(f"- {'✅' if c['up'] else '❌'} **{c['name']}** — {c['detail']}\n")
+    # NOTE: exits 0 even on outage — the data commit IS the deliverable; a
+    # nonzero exit here would abort the workflow before data is committed and
+    # freeze the public page on stale all-green data (observed Oct 10-17).
 
 
 if __name__ == "__main__":
