@@ -75,26 +75,26 @@
     {
       "date": "2026-10-18",
       "component": "admin",
-      "up": 4,
-      "total": 4
+      "up": 5,
+      "total": 5
     },
     {
       "date": "2026-10-18",
       "component": "api",
-      "up": 4,
-      "total": 4
+      "up": 5,
+      "total": 5
     },
     {
       "date": "2026-10-18",
       "component": "ingestion",
-      "up": 4,
-      "total": 4
+      "up": 5,
+      "total": 5
     },
     {
       "date": "2026-10-18",
       "component": "marketing",
-      "up": 4,
-      "total": 4
+      "up": 5,
+      "total": 5
     }
   ]
 }
