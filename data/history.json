@@ -51,26 +51,26 @@
     {
       "date": "2026-10-17",
       "component": "admin",
-      "up": 6,
-      "total": 6
+      "up": 7,
+      "total": 7
     },
     {
       "date": "2026-10-17",
       "component": "api",
-      "up": 6,
-      "total": 6
+      "up": 7,
+      "total": 7
     },
     {
       "date": "2026-10-17",
       "component": "ingestion",
-      "up": 6,
-      "total": 6
+      "up": 7,
+      "total": 7
     },
     {
       "date": "2026-10-17",
       "component": "marketing",
-      "up": 6,
-      "total": 6
+      "up": 7,
+      "total": 7
     }
   ]
 }
