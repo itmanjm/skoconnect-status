@@ -1,6 +1,6 @@
 {
   "overall": "operational",
-  "updated_at": "2026-10-19T18:05:05-05:00",
+  "updated_at": "2026-10-19T20:47:49-05:00",
   "timezone": "America/Jamaica",
   "components": [
     {
@@ -11,7 +11,7 @@
       "up": true,
       "http_code": 200,
       "detail": "HTTP 200",
-      "checked_at": "2026-10-19T18:04:52-05:00",
+      "checked_at": "2026-10-19T20:47:36-05:00",
       "down_since": null
     },
     {
@@ -22,7 +22,7 @@
       "up": true,
       "http_code": 200,
       "detail": "HTTP 200",
-      "checked_at": "2026-10-19T18:04:53-05:00",
+      "checked_at": "2026-10-19T20:47:36-05:00",
       "down_since": null
     },
     {
@@ -33,7 +33,7 @@
       "up": true,
       "http_code": 200,
       "detail": "healthy",
-      "checked_at": "2026-10-19T18:04:53-05:00",
+      "checked_at": "2026-10-19T20:47:36-05:00",
       "down_since": null
     },
     {
@@ -44,7 +44,7 @@
       "up": true,
       "http_code": 405,
       "detail": "HTTP 405",
-      "checked_at": "2026-10-19T18:05:05-05:00",
+      "checked_at": "2026-10-19T20:47:48-05:00",
       "down_since": null
     }
   ]
