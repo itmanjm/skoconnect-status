@@ -1,7 +1,7 @@
 # skoconnect-status
 
 Public status page for SkoConnect — https://status.skoconnect.com (once DNS is
-attached; interim URL https://itmanjm.github.io/skoconnect-status/).
+attached; interim URL https://jozu-works.github.io/skoconnect-status/).
 
 Independence requirement (source card): the status page must NOT share hosting
 or DNS-failure domains with the product. This repo lives entirely on GitHub
@@ -36,7 +36,7 @@ When ready to attach status.skoconnect.com:
 1. GitHub → repo Settings → Pages → Custom domain: `status.skoconnect.com`
    (this writes the `CNAME` file into the branch automatically).
 2. At Namecheap (DNS for skoconnect.com, NS registrar-servers.com) add:
-   `status CNAME itmanjm.github.io.` (or A records 185.199.108–111.153).
+   `status CNAME jozu-works.github.io.` (or A records 185.199.108–111.153).
 3. Wait for DNS propagation, then re-enforce HTTPS in Pages settings.
 
 This repo intentionally does NOT carry the CNAME file until that DNS change
