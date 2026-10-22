@@ -171,26 +171,26 @@
     {
       "date": "2026-10-22",
       "component": "admin",
-      "up": 2,
-      "total": 2
+      "up": 3,
+      "total": 3
     },
     {
       "date": "2026-10-22",
       "component": "api",
-      "up": 2,
-      "total": 2
+      "up": 3,
+      "total": 3
     },
     {
       "date": "2026-10-22",
       "component": "ingestion",
-      "up": 2,
-      "total": 2
+      "up": 3,
+      "total": 3
     },
     {
       "date": "2026-10-22",
       "component": "marketing",
-      "up": 2,
-      "total": 2
+      "up": 3,
+      "total": 3
     }
   ]
 }
